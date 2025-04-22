@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .box{
+            display: flex;
+            width: 700px;
+            height: 700px;
+            border-left: 1px solid rgb(0, 0, 0) ;
+            border-bottom: 1px solid #000;
+            margin: 50px auto;
+            justify-content: space-around;
+            align-items: flex-end;
+            text-align: center;
+        }
+        .box>div{
+            display: flex;
+            width: 50px;
+            background-color: pink;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .box div span{
+            margin-top: -20px;
+        }
+        .box div h4{
+            margin-bottom: -35px;
+            width: 70px;
+            margin-left: -10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        let arr = [];
+        for(i=0;i<4;i++){
+            arr.push(prompt(`请输入第${i+1}季度的数据`));
+        }
+        document.write(`
+        <div class="box">
+        <div style = "height: ${arr[0]}px;">
+        <span>${arr[0]}</span>
+        <h4>第一季度</h4>
+        </div>
+        <div style = "height: ${arr[1]}px;">
+            <span>${arr[1]}</span>
+            <h4>第二季度</h4>
+            </div>
+            <div style = "height: ${arr[2]}px;">
+                <span>${arr[2]}</span>
+                <h4>第三季度</h4>
+                </div>
+                <div style = "height: ${arr[3]}px;">
+                    <span>${arr[3]}</span>
+                    <h4>第四季度</h4>
+                    </div>
+    </div>
+`)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        width: auto;
+        height: 200px;
+        text-align: center;
+    }
+</style>
+<body>
+    <script>
+        function gcd(num1,num2){
+            let temp = 0;
+            if(num1 < num2){
+                temp = num1;
+                num1 = num2;
+                num2 = temp;
+            }
+            while(num1 % num2 !== 0){
+                temp = num1 % num2;
+                num1 = num2;
+                num2 = temp;
+            }
+            return num2;
+        }
+        let num = +prompt("Please enter n: ");
+        let count = 0;
+        for(i = 1; i < num; i++){
+            if(gcd(num,i) === 1){
+                count++;
+                document.write(`   ${i}  `);
+            }
+        }
+        document.write(`<div>所得数为：${count}</div>`);
+    </script>
+</body>
+</html>

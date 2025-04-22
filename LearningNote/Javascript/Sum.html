@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sum</title>
+    <style>
+        div{
+            width: auto;
+            height: 200px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let sum = 0;
+        let n = 1;
+        let prople = +prompt("请输入AA人数");
+        if(prople !== 0){
+            while(n != 0){
+          n = +prompt("请输入需要累加的数据,结束输入0或者选择取消")
+          sum = n + sum;
+        }
+        sum = sum / prople;
+        }else{
+            alert("错误，人数不能为0");
+        }
+        document.write(`<div>所得数为：${sum}</div>`);
+        </script>
+</body>
+</html>

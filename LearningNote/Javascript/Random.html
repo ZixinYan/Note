@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding : 0;
+        }
+        h2{
+          display: block;
+          text-align: center;
+          margin: 10px;
+          font-size: larger; 
+          color:#666 
+        }
+        div{
+            width: 300px;
+            height: 600px;
+            margin: 30px auto;
+            padding: 0 auto;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h2>生成随机数</h2>
+    <script>
+        let floor = +prompt("请输入生成随机数最低值： ");
+        let cile = +prompt("请输入生成随机数最大值：");
+        let randomNum = Math.floor(Math.random()*(cile - floor + 1 )+floor);
+        document.write(`<div>生成随机数为： ${randomNum}.</div> `); 
+        const nav = document.querySelector(`div`);
+        console.log(nav);
+    </script>
+</body>
+</html>

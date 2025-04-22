@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>订单创建</title>
+</head>
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  div{
+    margin: 0 auto;
+    width: 700px;
+    color: #666;
+    height: 800px;
+  }
+  div h2{ 
+    font-size: 40px;
+    padding:30px;
+    display: block;
+    color: aqua;
+    text-align: center;
+  }
+  div table{
+   border-collapse: collapse;
+  }
+  div table,th{
+    padding: 5px 20px;
+  }
+  div table,th,td{
+    border: 1px solid #000;
+    margin: 0 auto;
+    padding: 20px;
+  }
+</style>
+<body>
+  <div>
+  <h2>订单信息</h2>
+  <script>
+    let name = prompt("请输入姓名");
+    let price = prompt("请输入单价");
+    let num = prompt("请输入数量");
+    let addr = prompt("请输入收货地址");
+    let total = num*price;
+    document.write(` 
+  <table>
+    <tr>
+    <th>商品名称</th>
+    <th>商品价格</th>
+    <th>商品数量</th>
+    <th>总    价</th>
+    <th>收货地址</th>
+  </tr>
+  <tr>
+    <th>${name}</th>
+    <th>${price}</th>
+    <th>${num}</th>
+    <th>${total}</th>
+    <th>${addr}</th>
+  </tr>
+  </table>`)
+  </script>  
+  </div>
+</body>
+</html>
