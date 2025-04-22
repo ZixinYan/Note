@@ -25,15 +25,15 @@ Status(*VisitFunc)(int v);  // Function pointer to a visit function
 //
 
 //
-// directed tree(ÓĞÏòÊ÷): 
-// the tree with one node whose in-degree is zero. Other nodes¡¯s in-degree is 1.
+// directed tree(æœ‰å‘æ ‘): 
+// the tree with one node whose in-degree is zero. Other nodesâ€™s in-degree is 1.
 //
 
-//Adjacency Matrix(ÁÚ½Ó¾ØÕó)
-//ÓĞÏòÍ¼ÖĞ¿´³ö¶È¿´ĞĞ£¬¿´Èë¶È¿´ÁĞ
-//´øÈ¨Èç¹ûÃ»ÓĞÁ¬½ÓÓÃÎŞÇî±íÊ¾
+//Adjacency Matrix(é‚»æ¥çŸ©é˜µ)
+//æœ‰å‘å›¾ä¸­çœ‹å‡ºåº¦çœ‹è¡Œï¼Œçœ‹å…¥åº¦çœ‹åˆ—
+//å¸¦æƒå¦‚æœæ²¡æœ‰è¿æ¥ç”¨æ— ç©·è¡¨ç¤º
 
-//´æ´¢ÔÚÆÕÍ¨Êı×éÕ¼ÓÃN^2,±È½ÏÀË·Ñ£¬ËùÒÔ´æÔÚÁÚ½Ó±í(Adjacency List )ÖĞ£¬¿Õ¼äĞèÇóÎªO(E+N),½öÓÃÓÚÏ¡ÊèÍ¼,¼ÇÂ¼³ö¶È(¼ÇÂ¼Èë¶ÈµÄÄæÁÚ½Ó±í),ÎŞÏòÍ¼ÓĞ¹ØÏµ¾Í¼ÇÂ¼
+//å­˜å‚¨åœ¨æ™®é€šæ•°ç»„å ç”¨N^2,æ¯”è¾ƒæµªè´¹ï¼Œæ‰€ä»¥å­˜åœ¨é‚»æ¥è¡¨(Adjacency List )ä¸­ï¼Œç©ºé—´éœ€æ±‚ä¸ºO(E+N),ä»…ç”¨äºç¨€ç–å›¾,è®°å½•å‡ºåº¦(è®°å½•å…¥åº¦çš„é€†é‚»æ¥è¡¨),æ— å‘å›¾æœ‰å…³ç³»å°±è®°å½•
 
 
 //------------------------Graph Traversal-------------------------
@@ -87,7 +87,7 @@ bool IsQueueEmpty(Queue* Q) {
 }
 bool EnQueue(Queue* Q, int e) {
     if ((Q->rear + 1) % MAX == Q->front) {
-        return false;  // ¶ÓÁĞÂú
+        return false;  // é˜Ÿåˆ—æ»¡
     }
     Q->data[Q->rear] = e;
     Q->rear = (Q->rear + 1) % MAX;
@@ -95,7 +95,7 @@ bool EnQueue(Queue* Q, int e) {
 }
 bool DeQueue(Queue* Q, int* e) {
     if (IsQueueEmpty(Q)) {
-        return false;  // ¶ÓÁĞ¿Õ
+        return false;  // é˜Ÿåˆ—ç©º
     }
     *e = Q->data[Q->front];
     Q->front = (Q->front + 1) % MAX;
@@ -103,7 +103,7 @@ bool DeQueue(Queue* Q, int* e) {
 }
 
 void BFSTraverse(Graph G, Status(*Visit)(int v)) {
-    // ³õÊ¼»¯·ÃÎÊ±êÖ¾Êı×éÎªfalse
+    // åˆå§‹åŒ–è®¿é—®æ ‡å¿—æ•°ç»„ä¸ºfalse
     for (int v = 0; v < G.vexnum; ++v) {
         visited[v] = false;
     }
@@ -111,7 +111,7 @@ void BFSTraverse(Graph G, Status(*Visit)(int v)) {
     Queue Q;
     InitQueue(&Q);
 
-    // ¶ÔÃ¿¸öÎ´·ÃÎÊµÄ¶¥µãÖ´ĞĞBFS
+    // å¯¹æ¯ä¸ªæœªè®¿é—®çš„é¡¶ç‚¹æ‰§è¡ŒBFS
     for (int v = 0; v < G.vexnum; ++v) {
         if (!visited[v]) {
             visited[v] = true;
@@ -119,7 +119,7 @@ void BFSTraverse(Graph G, Status(*Visit)(int v)) {
             EnQueue(&Q, v);
 
             while (!IsQueueEmpty(&Q)) {
-                //ÄÃ³öÏÂÒ»´Î½øĞĞ±éÀúµÄ½áµã
+                //æ‹¿å‡ºä¸‹ä¸€æ¬¡è¿›è¡Œéå†çš„ç»“ç‚¹
                 int u;
                 DeQueue(&Q, &u);
                 for (int w = 0; w < G.vexnum; ++w) {
@@ -136,10 +136,10 @@ void BFSTraverse(Graph G, Status(*Visit)(int v)) {
 
 //---------------------------------Topological Sort------------------------------------
 void TopologicalSort(Graph G) {
-    int inDegree[MAX] = { 0 };  // Èë¶ÈÊı×é
-    int topologicalOrder[MAX];  // ´æ´¢ÍØÆËÅÅĞò½á¹û
+    int inDegree[MAX] = { 0 };  // å…¥åº¦æ•°ç»„
+    int topologicalOrder[MAX];  // å­˜å‚¨æ‹“æ‰‘æ’åºç»“æœ
     int index = 0;
-    // ¼ÆËãÃ¿¸ö¶¥µãµÄÈë¶È
+    // è®¡ç®—æ¯ä¸ªé¡¶ç‚¹çš„å…¥åº¦
     for (int i = 0; i < G.vexnum; ++i) {
         for (int j = 0; j < G.vexnum; ++j) {
             if (G.adjMatrix[i][j] != 0) {
@@ -149,13 +149,13 @@ void TopologicalSort(Graph G) {
     }
     Queue Q;
     InitQueue(&Q);
-    // ½«ËùÓĞÈë¶ÈÎª0µÄ¶¥µãÈë¶Ó
+    // å°†æ‰€æœ‰å…¥åº¦ä¸º0çš„é¡¶ç‚¹å…¥é˜Ÿ
     for (int i = 0; i < G.vexnum; ++i) {
         if (inDegree[i] == 0) {
             EnQueue(&Q, i);
         }
     }
-    // Ö´ĞĞÍØÆËÅÅĞò
+    // æ‰§è¡Œæ‹“æ‰‘æ’åº
     while (!IsQueueEmpty(&Q)) {
         int u;
         DeQueue(&Q, &u);
@@ -170,13 +170,13 @@ void TopologicalSort(Graph G) {
             }
         }
     }
-    // ¼ì²éÊÇ·ñ´æÔÚ»·
+    // æ£€æŸ¥æ˜¯å¦å­˜åœ¨ç¯
     if (index != G.vexnum) {
-        printf("Í¼ÖĞ´æÔÚ»·£¬ÎŞ·¨½øĞĞÍØÆËÅÅĞò¡£\n");
+        printf("å›¾ä¸­å­˜åœ¨ç¯ï¼Œæ— æ³•è¿›è¡Œæ‹“æ‰‘æ’åºã€‚\n");
         return;
     }
-    // ´òÓ¡ÍØÆËÅÅĞò½á¹û
-    printf("ÍØÆËÅÅĞò½á¹û£º\n");
+    // æ‰“å°æ‹“æ‰‘æ’åºç»“æœ
+    printf("æ‹“æ‰‘æ’åºç»“æœï¼š\n");
     for (int i = 0; i < index; ++i) {
         printf("%d ", topologicalOrder[i]);
     }
@@ -185,9 +185,9 @@ void TopologicalSort(Graph G) {
 
 //--------------------------------Shortest Paths Problem------------------------------------
 //Strategy: Breadth-first search
-#define INF 9999  // ÓÃÓÚ±íÊ¾ÎŞÇî´óµÄÖµ
+#define INF 9999  // ç”¨äºè¡¨ç¤ºæ— ç©·å¤§çš„å€¼
 void Dijkstra(Graph G, int start, int dist[], int prev[]) {
-    bool visited[MAX] = { false };  // ·ÃÎÊ±êÖ¾Êı×é
+    bool visited[MAX] = { false };  // è®¿é—®æ ‡å¿—æ•°ç»„
     for (int i = 0; i < G.vexnum; ++i) {
         dist[i] = INF;
         prev[i] = -1;
@@ -204,7 +204,7 @@ void Dijkstra(Graph G, int start, int dist[], int prev[]) {
             }
         }
 
-        if (u == -1) break;  // Ê£Óà¶¥µã²»Á¬Í¨
+        if (u == -1) break;  // å‰©ä½™é¡¶ç‚¹ä¸è¿é€š
 
         visited[u] = true;
 
@@ -238,34 +238,34 @@ int MinKey(int key[], bool mstSet[], int vexnum) {
     return minIndex;
 }
 void PrimMST(Graph G) {
-    int parent[MAX];  // ÓÃÓÚ´æ´¢×îĞ¡Éú³ÉÊ÷
-    int key[MAX];  // ÓÃÓÚ´æ´¢×îĞ¡È¨Öµ
-    bool mstSet[MAX];  // ÓÃÓÚ±íÊ¾¶¥µãÊÇ·ñ°üº¬ÔÚ×îĞ¡Éú³ÉÊ÷ÖĞ
+    int parent[MAX];  // ç”¨äºå­˜å‚¨æœ€å°ç”Ÿæˆæ ‘
+    int key[MAX];  // ç”¨äºå­˜å‚¨æœ€å°æƒå€¼
+    bool mstSet[MAX];  // ç”¨äºè¡¨ç¤ºé¡¶ç‚¹æ˜¯å¦åŒ…å«åœ¨æœ€å°ç”Ÿæˆæ ‘ä¸­
 
-    // ³õÊ¼»¯ËùÓĞ¼üÖµÎªÎŞÇî´ó£¬mstSet[] Îª false
+    // åˆå§‹åŒ–æ‰€æœ‰é”®å€¼ä¸ºæ— ç©·å¤§ï¼ŒmstSet[] ä¸º false
     for (int i = 0; i < G.vexnum; i++) {
         key[i] = INF;
         mstSet[i] = false;
     }
-    // Ñ¡ÔñµÚÒ»¸ö¶¥µã×÷ÎªÆğÊ¼µã
-    key[0] = 0;  // Ê¹µÚÒ»¸ö¶¥µã×÷Îª¸ù½Úµã
-    parent[0] = -1;  // µÚÒ»¸ö½ÚµãÃ»ÓĞ¸¸½Úµã
+    // é€‰æ‹©ç¬¬ä¸€ä¸ªé¡¶ç‚¹ä½œä¸ºèµ·å§‹ç‚¹
+    key[0] = 0;  // ä½¿ç¬¬ä¸€ä¸ªé¡¶ç‚¹ä½œä¸ºæ ¹èŠ‚ç‚¹
+    parent[0] = -1;  // ç¬¬ä¸€ä¸ªèŠ‚ç‚¹æ²¡æœ‰çˆ¶èŠ‚ç‚¹
     for (int count = 0; count < G.vexnum - 1; count++) {
-        // ´ÓÎ´°üº¬ÔÚ×îĞ¡Éú³ÉÊ÷ÖĞµÄ¶¥µãÖĞÑ¡È¡È¨Öµ×îĞ¡µÄ¶¥µã
+        // ä»æœªåŒ…å«åœ¨æœ€å°ç”Ÿæˆæ ‘ä¸­çš„é¡¶ç‚¹ä¸­é€‰å–æƒå€¼æœ€å°çš„é¡¶ç‚¹
         int u = MinKey(key, mstSet, G.vexnum);
-        // ½«Ñ¡È¡µÄ¶¥µãÌí¼Óµ½×îĞ¡Éú³ÉÊ÷¼¯ºÏÖĞ
+        // å°†é€‰å–çš„é¡¶ç‚¹æ·»åŠ åˆ°æœ€å°ç”Ÿæˆæ ‘é›†åˆä¸­
         mstSet[u] = true;
-        // ¸üĞÂÓëÑ¡È¡¶¥µãÏàÁÚµÄ¶¥µãµÄ¼üÖµºÍ¸¸½Úµã
+        // æ›´æ–°ä¸é€‰å–é¡¶ç‚¹ç›¸é‚»çš„é¡¶ç‚¹çš„é”®å€¼å’Œçˆ¶èŠ‚ç‚¹
         for (int v = 0; v < G.vexnum; v++) {
-            // ¸üĞÂ¶¥µãvµÄ¼üÖµÖ»ÔÚËü²»ÔÚ×îĞ¡Éú³ÉÊ÷ÖĞ£¬´æÔÚ´Óuµ½vµÄ±ß£¬ÇÒÈ¨ÖµĞ¡ÓÚvµ±Ç°µÄ¼üÖµ
+            // æ›´æ–°é¡¶ç‚¹vçš„é”®å€¼åªåœ¨å®ƒä¸åœ¨æœ€å°ç”Ÿæˆæ ‘ä¸­ï¼Œå­˜åœ¨ä»uåˆ°vçš„è¾¹ï¼Œä¸”æƒå€¼å°äºvå½“å‰çš„é”®å€¼
             if (G.adjMatrix[u][v] && mstSet[v] == false && G.adjMatrix[u][v] < key[v]) {
                 parent[v] = u;
                 key[v] = G.adjMatrix[u][v];
             }
         }
     }
-    // ´òÓ¡×îĞ¡Éú³ÉÊ÷
-    printf("±ß \tÈ¨Öµ\n");
+    // æ‰“å°æœ€å°ç”Ÿæˆæ ‘
+    printf("è¾¹ \tæƒå€¼\n");
     for (int i = 1; i < G.vexnum; i++) {
         printf("%d - %d \t%d \n", parent[i], i, G.adjMatrix[i][parent[i]]);
     }
@@ -281,7 +281,7 @@ int Find(int parent[], int i) {
         return i;
     return Find(parent, parent[i]);
 }
-// ²¢²é¼¯µÄºÏ²¢²Ù×÷
+// å¹¶æŸ¥é›†çš„åˆå¹¶æ“ä½œ
 void Union(int parent[], int rank[], int x, int y) {
     int xroot = Find(parent, x);
     int yroot = Find(parent, y);
@@ -297,7 +297,7 @@ void Union(int parent[], int rank[], int x, int y) {
         rank[xroot]++;
     }
 }
-// °´±ßµÄÈ¨ÖµÅÅĞò
+// æŒ‰è¾¹çš„æƒå€¼æ’åº
 int compare(const void* a, const void* b) {
     Edge* a1 = (Edge*)a;
     Edge* b1 = (Edge*)b;
