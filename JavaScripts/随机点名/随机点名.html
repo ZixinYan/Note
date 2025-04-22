@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<style>
+    *{
+        margin : 0;
+        padding : 0;
+        box-sizing: border-box;
+    }
+    #back{
+        display: block;
+        width: 652px;
+        height: 482px;
+        margin: 30px auto;
+        background-image: url("../轮播图/image/4.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: auto;
+        opacity: 0.8;
+    }
+    .background button{
+        display: block;
+        padding: 5px 30px;
+        margin: 0 auto ;
+        }
+    h2{
+        text-align: center;
+        color: black;
+        padding: 30px 0 5px 80px;
+        border-bottom: 1px #666 dashed;
+        font-size: 50px;
+    }
+    p{
+        padding: 50px 0px 20px 100px;
+        color: blueviolet;
+        font-size: 30px;
+        font-style: italic;
+        font-weight: 500;
+    }
+    .background div{
+        display: block;
+        margin:20px auto;
+        background-image: none;
+    }
+    .box button{
+        float: left;
+        margin: 30px 100px 100px 100px;
+        padding: 5px 30px;
+        font-size: 20px;
+    }
+    #search{
+        width: 400px;
+        display: block;
+        margin: 5px auto;
+        border: #666 1px dashed;
+        resize: none;
+        opacity: 0;
+    }
+    ul{
+        float: right;
+        list-style: none;
+        margin: 0 0 0 200px;
+        opacity: 0;
+        
+    }
+    li{
+        color: aqua;
+        padding:5px 5px;
+        border: #666 1px dashed;
+    }
+    h3{
+        display: block;
+        width: 400px;
+        margin: 40px 0 10px 40px;
+        color: aquamarine;
+        font-size: 40px;
+        border-bottom: #666 1px dashed;
+    }
+
+    #comment{
+        width: 500px;
+        height: 50px;
+        display: block;
+        margin: 20px 0 30px 100px;
+        border: #666 1px solid;
+        resize: none;
+        opacity: 0.5;
+    }
+
+    #context{
+        display: block;
+        justify-content: flex-start;
+        width: 500px;
+        margin: 10px;
+        opacity: 0;
+        }
+    #user{
+        display: inline;
+        font-size: 20px;
+        color: blue;
+        font-style: italic;
+        opacity: 0;
+    }
+    #text{
+        display: block;
+        width: 500px;
+        margin: 20px 0 0 100px;
+        text-align: left;
+        border-bottom: #666 1px dashed;
+        opacity: 0;
+    }
+</style>
+<script>
+    window.addEventListener('load',function(){
+        console.log("I'm loading");
+    }) 
+</script> 
+<body>
+    <php>
+        
+    </php>
+    <ul>
+        <li>导的手怎么能牵她的手</li>
+        <li>60级原神睾手微服私访ing</li>
+        <li>狗熊岭夺宝奇兵光头强</li>
+        <li>玉玉复发，退网紫砂</li>
+        <li>GG爆</li>
+    </ul>
+    <div  class="background" id="back">
+        <h2>随机点名</h2>
+        <textarea placeholder="查询信息" id="search"></textarea> 
+        <button>Check Details</button>
+        <p>抽到的人： </p>
+        <div class="box">
+            <button id="start">开始</button>
+            <button id="end">结束</button>
+        </div>
+    </div>
+    <h3>评论区</h3>
+    <textarea placeholder="发一条友善的评论" id="comment"></textarea>
+    <div id="context">
+        <p id="user">未知发布者</p>
+        <div id="text">           </div>
+    </div>
+    <script>
+        const arr = [
+            '导的手怎么能牵她的手',
+            '60级原神睾手微服私访ing',
+            '狗熊岭夺宝奇兵光头强',
+            '玉玉复发，退网紫砂',
+            'GG爆',
+        ];
+        let result = [];
+        let resultSearch = [];
+        const btn1 = document.querySelector('#start');
+        const btn2 = document.querySelector('#end');
+        const btn3 = document.querySelector('.background button');
+        const text = document.querySelector('#search');
+        const List = document.querySelector('ul');
+        const comment = document.querySelector('#comment')
+        const user = document.querySelector('#user');
+        const context = document.querySelector('#context');
+        const t = document.querySelector('#text');
+        if(btn1 == null||btn2 == null){
+            console.assert("Worng");
+        }
+        let c = 0;
+        let match = 1;
+        let random = 0;
+        const content = document.querySelector('p');
+        btn1?.addEventListener('click',function(){
+            c = setInterval(function(){
+            random = Math.floor(Math.random()*arr.length);
+              //  for(i = 0;i<arr.length;i++){
+                console.log(random);
+                content.innerHTML = "抽到的人： " + arr[random];
+                //    if(i === arr.length - 1){
+                  //     i=0;
+                    //}
+              //  }
+            }, 35);
+        })
+        btn2?.addEventListener('click',function(){
+        clearInterval(c);
+        result.push(arr[random]+"  "+`${match}等奖`);
+        resultSearch.push(arr[random]);
+        match++;
+        arr.splice(random,1);
+        })
+        judge = true;
+    btn3?.addEventListener('click',function(){
+        text.style.opacity = 0.8;
+        text.addEventListener('focus',function(){
+            List.style.opacity = 1;
+            btn3?.addEventListener('click',function(){
+                for(i = 0;i < result.length;i++){
+                    if(text.value === resultSearch[i]){
+                        alert(result[i]);
+                        judge = false;
+                        break;
+                    }
+                }
+                text.value = '';
+                if(judge){
+                    alert(`There is no information about him`);
+                }
+            })
+        })
+        text.addEventListener('blur',function(){
+            List.style.opacity = 0;
+            text.style.opacity = 0;
+        })
+        })
+
+        comment.addEventListener('focus',function(){
+            comment.style.opacity = 1;
+            comment.addEventListener('keyup',function(e){
+                if(e.key === 'Enter'){
+                   user.style.opacity = 1;
+                   context.style.opacity = 1;
+                   t.style.opacity = 1;
+                   t.innerHTML = comment.value;
+                   comment.value = '';
+                   alert("评论成功");
+                }
+            })
+        })
+
+        comment.addEventListener('blur',function(){
+            comment.style.opacity = 0.5;
+        })
+    </script>
+</body>
+</html>

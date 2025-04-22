@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    h2{
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        color:#666;
+    }
+    .one{
+        width: 600px;
+        height: 700px;
+        margin:0 auto;
+        padding: 20px;
+        display: block;
+        background-color: pink;
+    }
+    .one p{
+        text-align: center;
+        color: royalblue;
+        font-size: 30px;
+    }
+    .one img{
+        display: flex;
+        width: 400px;
+        height: 600px;
+        padding: 25px 25px 25px 25px;
+        margin: 0 auto;
+        border: 5px dashed gold;
+        background-color: pink;
+    }
+
+</style>
+<body>
+    <h2>轮播图演示</h2>
+                <div class="one">
+                <img src="./image/1.jpg",alt='' />
+                <p>小春</p>
+                </div>
+        <script>
+            const picture = [
+                {url:'./image/1.jpg',title:"小春",color:'rgb(20,67,68)'},
+                {url:'./image/2.jpg',title:"小春",color:'rgb(30,57,58)'},
+                {url:'./image/3.jpg',title:"美游",color:'rgb(40,47,48)'},
+                {url:'./image/4.jpg',title:"抓走发配沙勒",color:'rgb(50,67,38)'},
+                {url:'./image/5.jpg',title:"星野老婆",color:'rgb(60,57,48)'},
+                {url:'./image/6.jpg',title:"toki",color:'rgb(20,47,58)'},
+                {url:'./image/7.jpg',title:"像你这样的大人……",color:'rgb(30,67,48)'},
+                {url:'./image/8.jpg',title:"对玛导至昏",color:'rgb(40,57,38)'},
+                {url:'./image/9.jpg',title:"未花老婆",color:'rgb(50,47,48)'},
+                {url:'./image/10.jpg',title:"瑞士卷，出击！",color:'rgb(60,67,58)'},
+            ]
+            let e = setInterval(function(){
+                const random = parseInt(Math.random() * picture.length);
+                console.log(random);
+                const img = document.querySelector('.one img');
+                img.src = picture[random].url;   
+                const title = document.qsuerySelector('.one p');
+                title.innerHTML = picture[random].title;
+                const color = document.querySelector('.one');
+                color.style.backgroundColor = picture[random].color;
+                div.addEventListener("mouseover", function () {
+                clearInterval(e);
+                console.assert("Call")
+                }, false);
+                div.addEventListener("mouseout", function () {
+                e = setInterval(function(){                
+                const random = parseInt(Math.random() * picture.length);
+                console.log(random);
+                const img = document.querySelector('.one img');
+                img.src = picture[random].url;   
+                const title = document.querySelector('.one p');
+                title.innerHTML = picture[random].title;
+                const color = document.querySelector('.one');
+                color.style.backgroundColor = picture[random].color;},3000)
+            }, false)   
+
+            },3000);
+
+         
+
+           //document.write(`<h2>轮播图演示</h2>
+             //   <div class="one">
+               // <img src="${img.src}",title="${img.title},alt="" />
+                //<p>小春</p>
+                //</div>`)
+        </script>
+</body>
+</html>
